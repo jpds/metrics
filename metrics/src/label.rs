@@ -56,6 +56,16 @@ where
     }
 }
 
+impl<K, V> From<(&K, &V)> for Label
+where
+    K: Into<SharedString> + Clone,
+    V: Into<SharedString> + Clone,
+{
+    fn from(pair: (&K, &V)) -> Label {
+        Label::new(pair.0.clone(), pair.1.clone())
+    }
+}
+
 /// A value that can be converted to a vector of [`Label`]s.
 pub trait IntoLabels {
     /// Consumes this value, turning it into a vector of [`Label`]s.
